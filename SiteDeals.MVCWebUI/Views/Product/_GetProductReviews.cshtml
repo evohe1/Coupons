@@ -1,0 +1,70 @@
+﻿@model IEnumerable<SiteDeals.Core.Model.ProductReviews>
+@{
+    int productId = Convert.ToInt32(ViewData["ProductId"]);
+}
+<div class="pagination-content-comment-container">
+    <div class="pagination-content-comment-title">
+        <span class="total-comments">@Model.Count() Yorum</span>
+ @*       <span class="sort-comments">
+            <a href="#">
+                <img src="images/icons/sort-.svg" alt="">
+                <i>Sırala</i>
+            </a>
+        </span>*@
+    </div>
+    @foreach (var item in Model)
+    {
+        <!--start-->
+        <div class="pagination-content-comment-item">
+            <div class="comment-profil">
+                <img src="images/common/Ellipse 6.png" alt="">
+            </div>
+            <div class="comment-center">
+                <span class="comment-title">@item.Username</span>
+                <span class="comment-time">@item.DateRelative</span>
+                <p>@item.Review</p>
+                <span class="twolike">
+                    <a href="#"><span class="material-icons">thumb_up</span> Beğen</a>
+                    <a href="#"><span class="material-icons">add_comment</span> Cevapla</a>
+                </span>
+            </div>
+            <div class="comment-right">
+                <a class="comment-s1" href="#">...</a>
+                <span class="number-likes"><span class="material-icons">thumb_up</span> @item.Likes</span>
+
+            </div>
+        </div>
+        <!--end-->
+    }
+    <form method="post" data-ajax="true" data-ajax-url="/product/PostComment" data-ajax-method="post" data-ajax-update="#comment-list">
+        <!--add comment-->
+        <div class="comment-container-bottom">
+            <div class="comment-text">
+                <div class="title">@*Yorum Yap*@</div>
+                <div class="comment-two">
+                    <span class="comment-profil">
+                        <img width="50" src="images/common/Ellipse 6.png" alt="">
+                    </span>
+
+                    <span class="comment-send">
+                        <input data-val="true"
+                               id="ProductId"
+                               name="ProductId"
+                               type="hidden"
+                               value="@productId" />
+
+
+                        <textarea id="comment-area" name="comment" type="text" placeholder="Ürün hakkında düşüncelerini paylaş..."></textarea>
+                    </span>
+                    <div>
+                        <button id="comment">
+                            <span class="go-to-product">Yorum Yap</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--add comment-->
+    </form>
+</div>

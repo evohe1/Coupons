@@ -1,0 +1,224 @@
+﻿@model List<ProductModel>
+
+<div class="container d-flex justify-content-center mt-25 mb-50">
+    <div class="row">
+        <div class="col-md-12">
+            @{
+                var spacer = "";
+            }
+
+            @foreach (var modelP in Model)
+            {
+                <div class="productsListItem">
+                    <div class="products-list-content">
+                        <div class="products-list-img">
+                            <a href="@Url.RouteUrl("ProductRoute", new { id = @modelP.Product.Id, slug= modelP.Product.Name })">
+                                @{
+                                    if (@modelP.Product.Images.FirstOrDefault()?.Url != null)
+                                    {
+                                        <img src=@modelP.Product.Images.FirstOrDefault()?.Url alt="">
+                                    }
+                                    else
+                                    {
+                                        <img src="../images/icons/default-product.png" alt="">
+                                    }
+                                }
+                            </a>
+                        </div>
+                    </div>
+                    <div class="products-list-text">
+                        <div class="productsTop">
+                            <span data-url="@modelP.Product.Id">
+                                @{
+                                    if (@modelP.IsLiked == isLiked.liked)
+                                    {
+                                        <i class="numberText">@modelP.Product.Likes</i>
+                                        <i><span id="plus" class="material-icons plusIcon">add</span></i>
+                                    }
+                                    else if (@modelP.IsLiked == isLiked.disliked)
+                                    {
+                                        <i><span id='minus' class="material-icons minusIcon">remove</span></i>
+                                        <i class="numberText">@modelP.Product.Likes</i>
+                                    }
+                                    else
+                                    {
+                                        <i><span id='minus' class="material-icons color-red downvote">expand_more</span></i>
+                                        <i class="numberText">@modelP.Product.Likes</i>
+                                        <i><span id="plus" class="material-icons color-green upvote">expand_less</span></i>
+                                    }
+                                }
+                            </span>
+                            <span class="time">
+                                <i><span class="material-icons">schedule</span></i>
+                                <i class="text">@modelP.DateRelative</i>
+                            </span>
+                        </div>
+                        <div class="productsText">
+                            <div class="title">
+                                @modelP.Product.Name
+                            </div>
+                            <div class="product-price-container">
+                                @{
+                                    if (@modelP.Product.PriceWithoutDiscount != 0)
+                                    {
+                                        <span class="originalPriceNew">@modelP.Product.Price₺</span>
+                                        <span class="originalPrice">@modelP.Product.PriceWithoutDiscount₺</span>
+                                        <span class="discount-amount-new">%@Math.Floor(100-(modelP.Product.Price/modelP.Product.PriceWithoutDiscount)*100)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="originalPriceNew">@modelP.Product.Price₺</span>
+                                    }
+                                }
+                                @*<span class="delivery-options-content-list">
+                            <i><span class="material-icons">local_shipping</span></i>
+                            <i class="free-shipping">10,00₺</i>
+                            <i class="delivery-options-content-company">@modelP.Product.Vendor</i>
+                            </span>*@
+                                @{
+                                    string vendor = @modelP.Product.Vendor;
+                                    if (vendor.Contains("://www."))
+                                    {
+                                        int pos = vendor.IndexOf("www");
+                                        vendor = vendor.Substring(pos + 4, vendor.Length - pos - 4);
+                                    }
+                                    <span class="delivery-options-content-company">@vendor </span>
+                                }
+
+                            </div>
+                            <p>
+                                <a href="@Url.RouteUrl("ProductRoute", new { id = @modelP.Product.Id, slug= modelP.Product.Name })" style="color: #4F4F4F">
+                                    <div class="limitedP">
+
+                                        @modelP.Product.Description
+
+                                    </div>
+                                </a>
+                                @*<a href="#">Devamını Oku <span class="material-icons moreAbsolute">navigate_next</span></a>*@
+                            </p>
+                        </div>
+                        <div class="productsBottom">
+                            <span class="username">
+                                <i class="img text">
+                                    <img src="images/icons/person-profile-user-group-people-svgrepo-com 1.svg" alt=""> @modelP.Product.CreatedByUserName
+                                </i>
+                            </span>
+                            <span class="products-right">
+                                <i><span class="material-icons">bookmark_border</span></i>
+                                <a href="@Url.RouteUrl("ProductRoute", new { id = @modelP.Product.Id, slug= modelP.Product.Name  })#comment-list" style="color: #4F4F4F">
+                                    <i><span class="material-icons">comment_bank</span> <i>20</i></i>
+                                </a>
+                                <div class="addToCartButton">
+                                    <button id="addToCart">
+                                        <span class="go-to-product"><a href=@modelP.Product.Link; style="color: rgb(255,255,255)">Ürüne Git</a></span>
+                                        <span class="img"><img src="/images/icons/external-link-alt-solid.svg"></span>
+                                    </button>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                @*
+            <div class="product-list-item card card-body @spacer">
+            <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
+            <div class="mr-2 mb-3 mb-lg-0"> <img src="https://i.imgur.com/5Aqgz7o.jpg" width="150" height="150" alt=""> </div>
+            <div class="media-body">
+            <h6 class="media-title font-weight-semibold"> <a href="#" data-abc="true">@modelP.Product.Name</a> </h6>
+            <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
+            <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Phones</a></li>
+            <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Mobiles</a></li>
+            </ul>
+            <p class="mb-3">@modelP.Product.Description</p>
+            <div>
+            <i class="ion-md-thumbs-up"></i>
+            </div>
+            </div>
+            <div class="mt-3 mt-lg-0 ml-lg-3 text-center">
+            <h3 class="mb-0 font-weight-semibold">@modelP.Product.Price TL</h3>
+            <div> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
+
+            <button type="button" class="btn btn-warning mt-4 text-white"><span class="ion-ios-search"></span> Fırsatı İncele</button>
+            </div>
+            </div>
+            </div>*@
+                { spacer = "mt-3"; }
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function checkIfLoggedIn() {
+            var ifNotLoggedIn = $(".membership-login-link").is(":visible");
+            if (ifNotLoggedIn) {
+                window.location.href = "/User/Login";
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        $(document).ready(function () {
+            $(".downvote").on('click', function (e) {
+                e.preventDefault();
+                var data = $(this).closest('[data-url]');
+                if (checkIfLoggedIn()) {
+                    var plusElement = data.find('#plus');
+                    var minusElement = data.find('#minus');
+                    if (minusElement.hasClass('downvote')) {
+                        $.ajax({
+                            type: "POST",
+                            url: "DownVote",
+                            beforeSend: function () {
+                                minusElement.text('').addClass('loading').removeClass('downvote material-icons color-red');
+                                plusElement.remove();
+                            },
+                            data: {
+                                id: data.attr('data-url')
+                            },
+                            success: function (result) {
+                                setTimeout(function () {
+                                    minusElement.text('remove').addClass('minusIcon material-icons').removeClass('downvote loading color-red');
+                                    data.find('.numberText').text(result);
+                                }, 1000);
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $(".upvote").on('click', function (e) {
+                e.preventDefault();
+                var data = $(this).closest('[data-url]');
+                if (checkIfLoggedIn()) {
+                    var plusElement = data.find('#plus');
+                    var minusElement = data.find('#minus');
+                    if (plusElement.hasClass('upvote')) {
+                        $.ajax({
+                            type: "POST",
+                            url: "UpVote",
+                            beforeSend: function () {
+                                plusElement.text('').addClass('loading').removeClass('upvote material-icons color-green');
+                                minusElement.remove();
+                            },
+                            data: {
+                                id: data.attr('data-url')
+                            },
+                            success: function (result) {
+                                setTimeout(function () {
+                                    plusElement.text('add').addClass('plusIcon material-icons').removeClass('upvote loading color-green');
+                                    data.find('.numberText').text(result);
+                                }, 1000);
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+}

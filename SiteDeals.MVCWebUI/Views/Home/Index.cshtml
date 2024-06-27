@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    @Html.ActionLink("Product List Sayfasına Git","List", "Product");
+    <br />
+    @Html.ActionLink("Product Tablo Sayfasına Git","Grid", "Product");
+    <br />
+    @Html.RouteLink("Product Detay Sayfasına Git", "ProductRoute", new { id = 4, slug= "iphone-13" })
+
+    <br />
+    @Html.ActionLink("senin kampanyan","Create", "Product");
+</div>

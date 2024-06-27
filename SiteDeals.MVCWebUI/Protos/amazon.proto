@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "AmazonGrpcService.Protos";
+
+package amazon;
+
+service Amazon{
+	rpc AmazonProductInfo(ProductUrl) returns (ProductInfo);
+
+}
+message ProductUrl{
+	string url= 1;
+}
+message ProductInfo{
+repeated Description Description =1;
+repeated Images images=2;
+repeated Category Category=3;
+string price=4;
+string previousPrice=5;
+}
+message Images{
+	string urljpg=1;
+}
+
+message Description{
+	
+	string info=1;
+}
+message Category{
+	string category=1;
+}

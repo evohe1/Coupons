@@ -1,0 +1,391 @@
+﻿@{
+    ViewData["Title"] = "Senin kampanyan!";
+}
+@model ProductModel
+
+
+<div id="product-add-panel">
+    <div class="container">
+        <div class="product-add-panel-container">
+            <div class="product-add-panel-header">
+                <h2>Ürün Ekleme Paneli</h2>
+                <button id="silinecek">doldur bakalım</button>
+            </div>
+            <!--ürün bağlantısı-->
+            <div class="product-add-panel-link">
+                <span class="title">ÜRÜN BAĞLANTISI</span>
+                <span class="panel-link">
+                    <input id="link" placeholder="Bir ürün bağlantısı ekleyin" type="text">
+                    <span class="material-icons cancel">cancel</span>
+                </span>
+            </div>
+            <!--ürün bağlantısı-->
+            <!--ürün Açıklaması Fotoğraf-->
+            <div class="product-add-panel-photos">
+                <div class="product-add-panel-row">
+                    <div class="product-add-panel-item">
+                        <span class="title">
+                            ÜRÜN FOTOĞRAFLARI
+                        </span>
+                        <P>Ürün fotoğrafları, bağlantı kısmında yapıştırdığınız link üzerinden otomatik olarak eklenir. Kendiniz de ürünle ilgili fotoğraflar ekleyerek kullanıcıların daha detaylı bilgi sahibi olmasında yardımcı olabilirsiniz.</P>
+                        <P>8 fotoğrafa kadar ekleme yapabilirsiniz. URL ve ya sürükle bırak özelliklerini kullanarak fotoğraf ekleyebilirsiniz. Fotoğrafların üzerine basılı tutup yerlerini düzenleyebilirsiniz.</P>
+                    </div>
+                    <div class="product-add-panel-item">
+                        <span class="title">
+                            URL ile yükle
+                        </span>
+                        <span class="photo-link">
+                            <input id="product-photolink" type="text" placeholder="https://" value="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Flag_of_Turkey.svg/320px-Flag_of_Turkey.svg.png">
+                            <i id="btn-product-upload-from-link" class="material-icons btnLink">navigate_next</i>
+                        </span>
+                    </div>
+                </div>
+                <div class="product-add-panel-row">
+                    <div class="product-add-panel-photo">
+                        <!--Fotoğraf Yükleme-->
+                        <div class="photo-item">
+                            @for (int i = 0; i < 8; i++)
+                            {
+                                <div class="input-group img-square" data-empty="true">
+                                    <span class="material-icons cancel" style="display:none;">cancel</span>
+                                    <div class="upload-box">
+                                        <label class="file-input-label" for="file-input"><span class="material-icons">add</span> Fotoğraf seçin ve ya sürükleyin.</label>
+                                        <input id="file-input" type="file" name="file" class="file-input file-image file-upload" accept="image/*">
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <!--Fotoğraf Yükleme-->
+                    </div>
+                </div>
+            </div>
+            <!--ürün Açıklaması Fotoğraf-->
+            <!--Ürün Başlığı-->
+            <div class="product-add-panel-title">
+                <span class="title">ÜRÜN BAŞLIĞI</span>
+                <span class="panel-title">
+                    <input id="product-title" onkeyup="TextAreaKarakterSayisiDogrula()" placeholder="Ürününüzün adını yazınız." type="text">
+                    <span id="remainingCharacterCounter" class="counterTitle">150</span>
+                </span>
+            </div>
+            <!--Ürün Başlığı-->
+            <!--Fiyat Bilgisi-->
+            <div class="product-add-panel-price-information">
+                <span class="title">FİYAT BİLGİLERİ</span>
+                <div class="product-add-panel-price-information-container">
+                    <div class="product-add-panel-price-information-item">
+                        <span>Ürün Fiyatı</span>
+                        <span class="item">
+                            <input id="productPrice" placeholder="Ürün fiyatı giriniz" type="number">
+                            <span class="material-icons cancel">cancel</span>
+                        </span>
+                    </div>
+                    <div class="product-add-panel-price-information-item">
+                        <span>Düştüğü Fiyat</span>
+                        <span class="item">
+                            <input id="discountPrice" placeholder="Ürünün ne kadardan düştüğünü giriniz" type="number">
+                            <span class="material-icons cancel">cancel</span>
+                        </span>
+                    </div>
+                    @*    <div class="product-add-panel-price-information-item">
+                    <span>Kargo Ücreti</span>
+                    <span class="item">
+                    <input id="shippingFee" placeholder="Kargo gönderim ücretini giriniz" type="number">
+                    <span class="material-icons cancel">cancel</span>
+                    </span>
+                    </div>*@
+                </div>
+                @* <span class="freeShippingTwo">
+                <input id="freeShipping" type="checkbox" name="freeShipping">
+                <label for="freeShipping">Ücretsiz Kargo</label>
+                </span>*@
+            </div>
+            <!--Fiyat Bilgisi-->
+            <!--Ürün Tanımı-->
+            <div class="product-add-panel-description">
+                <div class="product-add-panel-description-container">
+                    <span class="title">ÜRÜN TANIMI</span>
+                    <textarea class="ckeditor" id="editor-product-detail" name="product-detail"></textarea>
+                </div>
+            </div>
+            <!--Ürün Tanımı-->
+            <!--Kategori-->
+            <div class="product-add-panel-category">
+                <div class="product-add-panel-category-container">
+                    <span class="title">KATEGORİ <i>(Ürününüze en uygun kategoriyi seçiniz)</i></span>
+                    <div class="product-add-panel-category-item">
+                        @foreach (var item in Model.Tags)
+                        {
+                            <span class="item tag" data-id="@item.Id">@item.Name</span>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <!--Kategori-->
+            <!--Kampnaya Kodu-->
+            @*  <div class="product-add-panel-discount-code">
+            <div class="product-add-panel-discount-code-container">
+            <span class="title">KAMPANYA KODU</span>
+            <input id="discount-code" placeholder="Kullanıcıların kullanabileceği geçerli bir indirim kodu giriniz." type="text">
+            </div>
+            </div>*@
+            <!--Kampnaya Kodu-->
+            <!--Save-->
+            <div class="product-add-panel-save">
+                <div class="product-add-panel-save-container">
+                    @*          <div class="product-add-panel-save-item">
+                    <input value="Önizleme" id="ContentManagement_btnPreview" name="ContentManagement_btnPreview" type="submit">
+                    </div>*@
+                    <div class="product-add-panel-save-item">
+                        <input value="Yayınla" id="ContentManagement_btnSave" name="ContentManagement_btnSave" type="submit">
+                    </div>
+                </div>
+            </div>
+            <!--Save-->
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script src="~/js/lib/main.js"></script>
+    <script>
+        //function isValidUrl(string) {
+        //    try {
+        //        new URL(string);
+        //        return true;
+        //    } catch (_) {
+        //        return false;
+        //    }
+        //}
+
+        $(document).ready(function() {
+
+            $("#link").on('paste', function(e) {
+                var obj = $("body");
+                obj.block({ message: '<span class="loader"></span>' });
+               var url = e.originalEvent.clipboardData.getData('text');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/senin-kampanyan/doldur',
+                    data: JSON.stringify({ link: url }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(res) {
+                        res.images.forEach((element) => {
+                            $("#product-photolink").val(element.urljpg);
+                            $("#btn-product-upload-from-link").click();
+                            $("#product-photolink").val("");
+                        });
+                        $("#productPrice").val(res.price);
+                        $("#discountPrice").val(res.previousPrice);
+                        $("#product-title").val(res.title);
+                        console.log(res);
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    },
+                    complete: function(data) {
+                        obj.unblock();
+                    }
+                });
+                //var url = $(this).val();
+                //if (isValidUrl(url)) {
+                //    console.log(true);
+                //}
+                //else {
+                //    console.log(false);
+                //}
+
+            });
+
+
+
+            $("#silinecek").click(function() {
+                $("#link").val("https://www.amazon.de/-/en/WHITIN-Sportschuhe-Walkingschuhe-Gymnastikschuhe-Joggingschuhe/dp/B083DPP76S?ref_=Oct_d_odotd_d_0_0eefce06&pd_rd_w=0IWGS&pf_rd_p=ac8fdbbb-3028-45aa-8b4a-e4d570cee66b&pf_rd_r=QRT05D62HTEP1RBWCAQP&pd_rd_r=7f1b722c-caa1-4757-b3ea-5f29b494d6c0&pd_rd_wg=CCKOA");
+                $("#btn-product-upload-from-link").click();
+                $("#product-title").val("Spor ayakkabı adidas");
+                $("#productPrice").val("32");
+                $("#discountPrice").val("45");
+                myEditor.setData("test içerik")
+                $(".product-add-panel-category-item .tag").first().click();
+            });
+
+            var product = {};
+            product.images = [];
+            product.tags = [];
+
+
+            $(".product-add-panel-category-item .tag").click(function() {
+                $(this).toggleClass("selected");
+            });
+
+            $("#ContentManagement_btnSave").click(function() {
+                var obj = $(this);
+                obj.block({ message: '<span class="loader"></span>' });
+
+                product.name = $("#product-title").val();
+                product.description = window.myEditor.getData();
+                product.priceWithoutDiscount = $("#discountPrice").val();
+                product.price = $("#productPrice").val();
+                product.link = $(".product-add-panel-link #link").val();
+
+
+                var images = $(".img-square").filterData("empty", false);
+                for (let i = 0; i < images.length; i++) {
+                    product.images.push(
+                        {
+                            id: $(images[i]).data("id")
+                        });
+                }
+
+
+                var tags = $(".product-add-panel-category-item .tag.selected");
+                for (let i = 0; i < tags.length; i++) {
+                    product.tags.push(
+                        {
+                            tagId: $(tags[i]).data("id")
+                        });
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/senin-kampanyan',
+                    data: JSON.stringify(product),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(productLink) {
+                        console.log(productLink);
+                        window.location.href = productLink.url;
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    },
+                    complete: function(data) {
+                        obj.unblock();
+                    }
+                });
+
+            });
+
+
+
+
+
+            $(".file-input.file-image.file-upload").on('change', function(e) {
+                var obj = $(".img-square").filterData("empty", true).first();
+                obj.block({ message: '<span class="loader"></span>' });
+                var formData = new FormData();
+                formData.append("file", event.target.files[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: '/senin-kampanyan/fotograf-yukle-form',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        obj.data("empty", false);
+                        obj.css("background-image", `url(${response.url})`);
+                        obj.data("id", response.id);
+                        obj.find(".cancel").show();
+                        obj.find(".upload-box").hide();
+                    },
+                    error: function() {
+
+                    },
+                    complete: function(data) {
+                        obj.unblock();
+                    }
+                });
+                console.log();
+            });
+
+
+            $("#btn-product-upload-from-link").click(function() {
+                var obj = $(".img-square").filterData("empty", true).first();
+                obj.block({ message: '<span class="loader"></span>' });
+                var url = $("#product-photolink").val();
+                var photo = $(this).closest(".img-square");
+                $.ajax({
+                    type: "POST",
+                    url: '/senin-kampanyan/fotograf-yukle',
+                    data: JSON.stringify({ url }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(response) {
+                        if (obj.length) {
+                            obj.data("empty", false);
+                            obj.css("background-image", `url(${response.url})`);
+                            obj.data("id", response.id);
+                            obj.find(".cancel").show();
+                            obj.find(".upload-box").hide();
+                        }
+                        else {
+                            alert("çok fazla resim");
+                        }
+                    },
+                    error: function() {
+
+                    },
+                    complete: function(data) {
+                        obj.unblock();
+                    }
+                });
+            });
+
+            $(".product-add-panel-photo .cancel").click(function() {
+                var obj = $(this).closest(".img-square");
+                obj.block({ message: '<span class="loader"></span>' });
+                var id = obj.data("id");
+                $.ajax({
+                    type: "DELETE",
+                    url: '/senin-kampanyan/fotograf-sil',
+                    data: JSON.stringify({ id }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(response) {
+
+                    },
+                    error: function() {
+
+                    },
+                    complete: function(data) {
+                        obj.css("background-image", "none");
+                        obj.removeData("id");
+                        obj.data("empty", true);
+                        obj.find(".cancel").hide();
+                        obj.find(".upload-box").show();
+                        obj.unblock();
+                    }
+                });
+            });
+
+            $(".product-add-panel-link .cancel").click(function() {
+                $("#link").val("");
+            });
+
+        });
+
+        $.fn.filterData = function(key, value) {
+            return this.filter(function() {
+                return $(this).data(key) == value;
+            });
+        };
+    </script>
+    <script>
+        //Kalan Sayaç
+        function TextAreaKarakterSayisiDogrula() {
+            var sonSayi = 150 - document.getElementById("product-title").value.length;
+            if (sonSayi >= 0) {
+                document.getElementById("remainingCharacterCounter").innerHTML = sonSayi;
+            }
+            else {
+                document.getElementById("product-title").value = document.getElementById("product-title").value.substring(0, 100);
+                document.getElementById("remainingCharacterCounter").inddnerHTML = 0;
+            }
+        }
+                                                                                                                                                                //Kalan Sayaç
+    </script>
+}

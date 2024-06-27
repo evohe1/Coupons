@@ -1,0 +1,200 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using SiteDeals.MVCWebUI.Areas.Identity.Data
+@using System.Security.Claims
+@inject SignInManager<SiteDealsMVCWebUIUser> signInManager;
+@inject UserManager<SiteDealsMVCWebUIUser> userManager;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SiteDeals.MVCWebUI</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/project.css">
+    <link rel="stylesheet" media="only screen and (max-width:1500px)" href="~/css/project-media1366.css" type="text/css" media="screen" />
+    <link rel="stylesheet" media="only screen and (max-width:1200px)" href="~/css/project-media1024.css" type="text/css" media="screen" />
+    <link rel="stylesheet" media="only screen and (max-width:1023px)" href="~/css/project-media800.css" type="text/css" media="screen" />
+    <link rel="stylesheet" media="only screen and (max-width:640px)" href="~/css/project-media640.css" type="text/css" media="screen" />
+    <link rel="stylesheet" media="only screen and (max-width:550px)" href="~/css/project-media480.css" type="text/css" media="screen" />
+    <link rel="stylesheet" media="only screen and (max-width:445px)" href="~/css/project-media375.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/flexslider/flexslider.css">
+</head>
+<body>
+    <header>
+        <div id="containerHeader">
+            <div class="container">
+                <div class="twoList">
+                    <div class="logo">
+                        <a href="/"><img src="~/images/logo3.png" width="250" /></a>
+                    </div>
+                    <div class="hamburger-btn">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                    <div class="headerLogin">
+                        <div class="item">
+                            <div class="searchIcon">
+                                <i class="material-icons">search</i>
+                            </div>
+                            <input class="search-bar" placeholder="Ara" type="text">
+                        </div>
+                        @{
+                            if (signInManager.IsSignedIn(User))
+                            {
+
+                                <a href="/User/Info">
+                                    <img style="border-radius:50%; margin: 0px 10px;" height="40" width="40" src="@userManager.GetUserAsync(User).Result.Picture">
+                                </a>
+
+                                <div class="item">
+                                    <a class="membership-register-link" asp-action="Logout" asp-controller="User" asp-route-returnUrl="/Product/List">Çıkış</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="item">
+                                    <a class="membership-login-link" href="/User/Login">Giriş</a>
+                                </div>
+                                <div class="item">
+                                    <a class="membership-register-link" href="/uye-ol">Kayıt Ol</a>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="menu-list">
+            <div class="container">
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <div class="menu">
+                        <ul>
+                            <li><a href="#">Profilim</a></li>
+                            <li><a href="#">Eklediğim Kampanyalar</a></li>
+                            <li><a href="#">Yorumlarım</a></li>
+                        </ul>
+                    </div>
+                }
+                @*    <div class="menu">
+                <ul>
+                <li class="selected"><a href="#">Tümü</a></li>
+                <li><a href="#">Ev & Yaşam</a></li>
+                <li><a href="#">Elektronik</a></li>
+                <li><a href="#">Kozmetik</a></li>
+                <li><a href="#">Bahçe & Peyzaj</a></li>
+                <li><a href="#">Gaming</a></li>
+                <li><a href="#">Giyim</a></li>
+                <li><a href="#">Aksesuar</a></li>
+                <li><a href="#">Kırtasiye</a></li>
+                <li class="menu-all"><a href="#">Daha Fazla <span class="material-icons">navigate_next</span></a></li>
+                </ul>
+                </div>*@
+            </div>
+        </div>
+        @*        <div id="breadCrumb">
+        <div class="container">
+        <div class="breadCrumb_UT">
+        <a href="#">Aksesuar</a>
+        <a href="#">Saat</a>
+        <a href="#">Erkek Saat</a>
+        </div>
+        </div>
+        </div>*@
+    </header>
+    <div id="contentContainer">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+
+    <footer>
+        <div id="footer-container">
+            <div class="container">
+                <div class="footer-two">
+                    <div class="footer-item">
+                        <div class="item">
+                            <div class="title">
+                                Yardım
+                            </div>
+                            <a href="/gizlilik-sozlesmesi">Gizlilik Sözleşmesi</a>
+                            <a href="/aydinlatma-metni">Aydınlatma Metni</a>
+                            <a href="/kullanim-sozlesmesi">Kullanım Sözleşmesi</a>
+                            <a href="/cerezlerin-yonetimi">Çerezlerin Yönetimi</a>
+                            @*                                <a href="#">Duyurular</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Medya</a>*@
+                        </div>
+                        @*    <div class="item">
+                        <div class="title">
+                        Çözüm Merkezi
+                        </div>
+                        <a href="#">Ortaklar</a>
+                        <a href="#">Fiyatlandırma</a>
+                        <a href="#">Raporlar</a>
+                        </div>
+                        <div class="item">
+                        <div class="title">
+                        Bilgi Merkezi
+                        </div>
+                        <a href="#">Destek Hattı</a>
+                        <a href="#">Belgeleme</a>
+                        <a href="#">S.S.S</a>
+                        <a href="#">TeknoBlog</a>
+                        </div>*@
+                        <div class="item">
+                            <div class="title">
+                                Kampanyan
+                            </div>
+                            <a href="/hakkimizda">Hakkımızda</a>
+                            <a href="/kariyer">Kariyer</a>
+                            <a href="/bize-ulasin">Bize Ulaşın</a>
+                        </div>
+                    </div>
+                    <div class="footer-item">
+                        <div class="item">
+                            <div class="title">
+                                Haber Bültenimize Abone Ol
+                            </div>
+                            <div class="e-newsletter">
+                                <form>
+                                    <input type="text" placeholder="E-Posta Adresi">
+                                    <a href="#">
+                                        <span class="material-icons search-icon">
+                                            keyboard_arrow_right
+                                        </span>
+                                    </a>
+                                </form>
+
+                            </div>
+                            <div class="dipnot">
+                                Payshop’un Gizlilik Politikasını okuduğumu onaylıyorum ve verilerimin buna uygun olarak kullanılmasını kabul ediyorum.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </footer>
+
+
+
+
+    <script src="~/js/jquery-3.6.0.min.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/flexslider/jquery.flexslider.js"></script>
+    @*    <script type="module" src="~/lib/spin.js/spin.js"></script>*@
+
+    <script src="~/lib/jquery.blockUI/jquery.blockUI.min.js"></script>
+    <script src="~/js/project.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

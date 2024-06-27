@@ -1,0 +1,4 @@
+#footer-container .footer-two .footer-item:nth-child(1) {width: 100%; justify-content: space-between;}
+#footer-container .footer-two .footer-item:nth-child(2) {width: 100%;}
+#footer-container .footer-two .footer-item:nth-child(1) .item {width: calc(50% - 20px);margin-bottom: 25px;}
+.product-add-link-domain-container .item {width: 100%;}

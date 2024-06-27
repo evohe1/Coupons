@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService.Protos";
+
+package crawl;
+
+service Crawl{
+	rpc GetProductInfo(ProductUrl) returns (ProductInfo);
+
+}
+message ProductUrl{
+	string url= 1;
+}
+message ProductInfo{
+repeated Description Description =1;
+repeated Images images=2;
+repeated Category Category=3;
+double price=4;
+double previousPrice=5;
+string title=6;
+}
+message Images{
+	string urljpg=1;
+}
+
+message Description{
+	
+	string info=1;
+}
+message Category{
+	string category=1;
+}

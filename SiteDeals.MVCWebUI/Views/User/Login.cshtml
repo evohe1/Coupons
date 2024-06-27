@@ -1,0 +1,54 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Giriş";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+  <div class="row">
+
+    <div class="col-md-4 offset-md-4">
+        <h4>Üye Giriş Formu</h4>
+        <hr />
+        <form asp-action="LogIn" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UsernameOrEmail" class="control-label"></label>
+                <input asp-for="UsernameOrEmail" class="form-control" />
+                <span asp-validation-for="UsernameOrEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" asp-for="RememberMe" /> Beni Hatırla
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Giriş yap" class="btn btn-primary" />
+            </div>
+        </form>
+        <div class="col-md-6 col-md-offset-2">
+  
+    </div>
+        <a class="btn btn-info btn-block" asp-action="FacebookLogin">Facebook ile giriş yap</a>
+        <a class="btn btn-info btn-block" asp-action="GoogleLogin">Google ile giriş yap</a>
+
+        <a class="btn btn-info btn-block" asp-action="MicrosoftLogin">Microsoft ile giriş yap</a>
+
+        <a class="btn btn-link" asp-action="ResetPassword">Şifremi unuttum</a>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{
+    
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+}
+}

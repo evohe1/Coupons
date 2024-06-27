@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Product Page";
+}
+@model List<Product>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Price</td>
+            <td>PriceAbroad</td>
+            <td>IsDeleted</td>
+            <td>Link</td>
+            <td>Likes</td>
+            <td>CreatedAt</td>
+            <td>CreatedById></td>
+            <td>CreatedByUserName</td>
+            <td>CloudinaryPublicId</td>
+            <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+               <td>@item.Id</td>
+               <td>@item.Name</td>
+               <td>@item.Description</td>
+               <td>@item.Price</td>
+               <td>@item.PriceAbroad</td>
+               <td>@item.IsDeleted</td>
+               <td>@item.Link</td>
+               <td>@item.Likes</td>
+               <td>@item.CreatedAt</td>
+               <td>@item.CreatedById</td>
+          
+               <td>@item.CloudinaryPublicId</td>
+               <td>@item.Status</td>
+
+                    
+                     </tr>
+            }
+
+        </tbody>
+
+
+
+    </table>

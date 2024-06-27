@@ -1,0 +1,12 @@
+.productsText .product-price-container .delivery-options-content-list {padding: 15px 0 0;}
+.products-list-text .productsText .title {padding: 15px 0 10px;}
+.productsBottom .products-right>i {padding: 0 10px;}
+.productsBottom .addToCartButton>button {justify-content: flex-start;padding: 0 15px;}
+.productsBottom .addToCartButton .img {right: 15px;}
+.products-list-text .productsTop>span>i {height: 40px;font-size: 20px;}
+.productsText .addToCartButton {margin-top: 20px;}
+.other-products-container .other-products-item {width: calc(50% - 10px);}
+.product-add-link-domain-container .product-add-link-domain-btn {width: 100%;margin-bottom: 15px;}
+.product-add-link-domain-container .product-add-link-domain-next {width: 100%;padding: 10px 0;}
+.product-add-link-domain-container .item {height: auto;padding: 10px 0;}
+.sign-in-container .sign-in-item .text-container {padding: 25px 20px;}

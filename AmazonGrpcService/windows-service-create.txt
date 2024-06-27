@@ -1,0 +1,4 @@
+﻿https://docs.microsoft.com/tr-tr/dotnet/core/extensions/windows-service
+
+sc.exe create "Kampanyan - grpc - Amazon" binpath="C:\GrpcApps\Amazon\AmazonGrpcService.exe"
+

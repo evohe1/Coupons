@@ -1,0 +1,381 @@
+﻿@model ProductModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="productsDetail">
+    <div class="twoList">
+        <div class="item">
+            <!--Slider-->
+            <div class="detailSlider">
+                <!-- Place somewhere in the <body> of your page -->
+                <div id="slider" class="flexslider">
+                    <ul class="slides">
+                        @{
+                            if (Model.ProductImages is not null)
+                            {
+                                foreach (var image in Model.ProductImages)
+                                {
+                                    <li><img src="@image" /></li>
+                                }
+                            }
+                        }
+                        <!-- items mirrored twice, total of 12 -->
+                    </ul>
+                </div>
+                <div id="carousel" class="flexslider">
+                    <ul class="slides">
+                        @{
+                            if (Model.ProductImages is not null)
+                            {
+                                foreach (var image in Model.ProductImages)
+                                {
+                                    <li><img src="@image" /></li>
+                                }
+                            }
+                            else
+                            {
+                                <li><img src="../../images/icons/default-product.png" /></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <!--Slider-->
+        </div>
+        <div class="item item-second">
+            <!--text-->
+            <div class="productsText">
+                <div class="productsTop">
+                    <span data-url="@Model.Product.Id">
+
+                        @{
+                            if (@Model.IsLiked == isLiked.liked)
+                            {
+                                <i class="numberText">@Model.Product.Likes</i>
+                                <i><span id="plus" class="material-icons plusIcon">add</span></i>
+                            }
+                            else if (@Model.IsLiked == isLiked.disliked)
+                            {
+                                <i><span id='minus' class="material-icons minusIcon">remove</span></i>
+                                <i class="numberText">@Model.Product.Likes</i>
+                            }
+                            else
+                            {
+                                <i><span id='minus' class="material-icons color-red downvote">expand_more</span></i>
+                                <i class="numberText">@Model.Product.Likes</i>
+                                <i><span id="plus" class="material-icons color-green upvote">expand_less</span></i>
+                            }
+                        }
+                    </span>
+                    <a href="#comment-list">
+                        <span>
+                            <i><span class="material-icons">chat_bubble_outline</span></i>
+                            <i class="numberText">@Model.Product.Reviews</i>
+                        </span>
+                    </a>
+                </div>
+                <div class="product-information">
+                    <h1>@Model.Product.Name</h1>
+                    <span class="price-new">@Model.Product.Price₺</span>
+                    <div class="product-price-container">
+                        <span class="originalPrice">@Model.Product.PriceWithoutDiscount₺</span>
+                        <span class="discount-amount-new">%@Math.Floor((Model.Product.PriceWithoutDiscount - Model.Product.Price)/Model.Product.PriceWithoutDiscount*100)</span>
+                        <span class="delivery-options-content-list">
+                            @*
+                            <i><span class="material-icons">local_shipping</span></i>
+                            <i class="free-shipping">Ücretsiz</i>*@
+                            <i class="delivery-options-content-company" style="border-left:none; margin: 2px 5px;">@Model.Product.Vendor</i>
+                        </span>
+                    </div>
+                    <div class="addToCartButton">
+                        <button id="addToCart">
+                            <a href=@Model.Product.Link>
+                                <span class="go-to-product">Ürüne Git</span>
+                                <span class="img"><img src="~/images/icons/external-link-alt-solid.svg" alt=""></span>
+                            </a>
+                        </button>
+                    </div>
+                    <div class="product-seller-container">
+                        <span class="username">
+                            <i class="img text">
+                                <i class="adding">Ekleyen</i>
+                                <img src="~/images/icons/person-profile-user-group-people-svgrepo-com 1.svg" alt=""> @Model.Product.CreatedByUserName
+                            </i>
+                        </span>
+                        <span class="product-member-year">
+                            <span class="material-icons">calendar_month</span>
+                            <i>@Model.Product.User.CreatedAt.Value.Year yılından beri üye</i>
+                        </span>
+                        <span class="product-ratings-container">
+                            <span class="item" style="visibility: hidden;">
+                                <i><img src="~/images/icons/external-link-alt-solid.svg" alt=""></i>
+                                <i class="text">-</i>
+                            </span>
+                            <span class="item">
+                                <i><span class="material-icons">thumb_up</span></i>
+                                <i class="text">@Model.Product.Likes</i>
+                            </span>
+                            <span class="item">
+                                <i><span class="material-icons">chat_bubble_outline</span></i>
+                                <i class="text">@Model.Product.Reviews</i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--text-->
+        </div>
+    </div>
+    <!--product date of insertion-->
+    <div class="product-date-of-insertion">
+        <div class="date-of-insertion-container">
+            <span class="material-icons">schedule</span>
+            <span class="date-of-insertion-title">@Model.DateRelative @(!Model.DateRelative.EndsWith("önce") ? "tarihinde eklendi." : "")</span>
+        </div>
+    </div>
+    <!--product date of insertion-->
+    <!--product description area-->
+    <diiv class="product-description-area">
+        <div class="product-description-container">
+            <p>@Html.Raw(Model.Product.Description)</p>
+            <div class="social-media-share">
+                <div class="facebook"><a href="#">Paylaş</a></div>
+                <div class="twitter"><a href="#">Tweetle</a></div>
+            </div>
+        </div>
+    </diiv>
+    <!--product description area-->
+</div>
+
+<!--comment-->
+<div id="comment-list" class="pagination-content-comment-area">
+
+    @await Html.PartialAsync("_GetProductReviews", Model.ProductReviews)
+</div>
+<!--other products-->
+<div class="other-products-content">
+    <div class="other-products-title">Bunlar da İlgini Çekebilir</div>
+    <div class="other-products-container">
+        <!--start-->
+        <div class="other-products-item">
+            <div class="other-products-img">
+                <a href="#">
+                    <img src="~/images/common/Group-96.jpg" alt="">
+                    <span class="other-products-discount">
+                        100
+                    </span>
+                </a>
+            </div>
+            <div class="other-products-text">
+                <a href="#">
+                    <span class="other-products-text-title">Casio MTPV002D Kol Saati</span>
+                    <span class="other-products-text-price">425,00₺</span>
+                </a>
+            </div>
+        </div>
+        <!--start-->
+        <!--start-->
+        <div class="other-products-item">
+            <div class="other-products-img">
+                <a href="#">
+                    <img src="~/images/common/Group-97.jpg" alt="">
+                    <span class="other-products-discount">
+                        80
+                    </span>
+                </a>
+            </div>
+            <div class="other-products-text">
+                <a href="#">
+                    <span class="other-products-text-title">Fossil FFS5900 Erkek Kol Saati</span>
+                    <span class="other-products-text-price">1.000₺</span>
+                </a>
+            </div>
+        </div>
+        <!--start-->
+        <!--start-->
+        <div class="other-products-item">
+            <div class="other-products-img">
+                <a href="#">
+                    <img src="~/images/common/Group-98.jpg" alt="">
+                    <span class="other-products-discount">
+                        80
+                    </span>
+                </a>
+            </div>
+            <div class="other-products-text">
+                <a href="#">
+                    <span class="other-products-text-title">Casio MTPV002D Kol Saati</span>
+                    <span class="other-products-text-price">850,00₺</span>
+                </a>
+            </div>
+        </div>
+        <!--start-->
+        <!--start-->
+        <div class="other-products-item">
+            <div class="other-products-img">
+                <a href="#">
+                    <img src="~/images/common/Group-99.jpg" alt="">
+                    <span class="other-products-discount">
+                        75
+                    </span>
+                </a>
+            </div>
+            <div class="other-products-text">
+                <a href="#">
+                    <span class="other-products-text-title">Quark QC-423D-2A Erkek Kol Saati</span>
+                    <span class="other-products-text-price">807,00₺</span>
+                </a>
+            </div>
+        </div>
+        <!--start-->
+        <!--start-->
+        <div class="other-products-item">
+            <div class="other-products-img">
+                <a href="#">
+                    <img src="~/images/common/Group-100.jpg" alt="">
+                    <span class="other-products-discount">
+                        70
+                    </span>
+                </a>
+            </div>
+            <div class="other-products-text">
+                <a href="#">
+                    <span class="other-products-text-title">Seiko 5 Snzg09k1  Kol Saati</span>
+                    <span class="other-products-text-price">575,00₺</span>
+                </a>
+            </div>
+        </div>
+        <!--start-->
+        <!--start-->
+        <div class="other-products-item">
+            <div class="other-products-img">
+                <a href="#">
+                    <img src="~/images/common/Group-101.jpg" alt="">
+                    <span class="other-products-discount">
+                        70
+                    </span>
+                </a>
+            </div>
+            <div class="other-products-text">
+                <a href="#">
+                    <span class="other-products-text-title">Spiral Gostergeli Su Gecirmez Kol Saati</span>
+                    <span class="other-products-text-price">275,00₺</span>
+                </a>
+            </div>
+        </div>
+        <!--start-->
+    </div>
+</div>
+<!--other products-->
+@*<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Product.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+    </div>*@
+
+@section scripts{
+    <script>
+        $(window).on("load", function () {
+
+
+        @{
+            if (Model.ProductImages?.Count() > 1)
+            {
+                <text>
+                        $('#carousel').flexslider({
+                            animation: "slide",
+                            controlNav: false,
+                            animationLoop: false,
+                            slideshow: false,
+                            itemWidth: 150,
+                            itemMargin: 5,
+                            asNavFor: '#slider'
+                        }); </text>
+            }
+        }
+
+
+                $('#slider').flexslider({
+                    animation: "slide",
+                    controlNav: false,
+                    animationLoop: false,
+                    slideshow: false,
+                    sync: "#carousel"
+                });
+        });
+
+        function checkIfLoggedIn() {
+            var ifNotLoggedIn = $(".membership-login-link").is(":visible");
+            if (ifNotLoggedIn) {
+                window.location.href = "/User/Login";
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        $(document).ready(function () {
+            $(".downvote").on('click', function (e) {
+                e.preventDefault();
+                var data = $(this).closest('[data-url]');
+                if (checkIfLoggedIn()) {
+                    var plusElement = data.find('#plus');
+                    var minusElement = data.find('#minus');
+                    if (minusElement.hasClass('downvote')) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/Product/DownVote",
+                            beforeSend: function () {
+                                minusElement.text('').addClass('loading').removeClass('downvote material-icons color-red');
+                                plusElement.remove();
+                            },
+                            data: {
+                                id: data.attr('data-url')
+                            },
+                            success: function (result) {
+                                setTimeout(function () {
+                                    minusElement.text('remove').addClass('minusIcon material-icons').removeClass('downvote loading color-red');
+                                    data.find('.numberText').text(result);
+                                }, 1000);
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $(".upvote").on('click', function (e) {
+                e.preventDefault();
+                var data = $(this).closest('[data-url]');
+                if (checkIfLoggedIn()) {
+                    var plusElement = data.find('#plus');
+                    var minusElement = data.find('#minus');
+                    if (plusElement.hasClass('upvote')) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/Product/UpVote",
+                            beforeSend: function () {
+                                plusElement.text('').addClass('loading').removeClass('upvote material-icons color-green');
+                                minusElement.remove();
+                            },
+                            data: {
+                                id: data.attr('data-url')
+                            },
+                            success: function (result) {
+                                setTimeout(function () {
+                                    plusElement.text('add').addClass('plusIcon material-icons').removeClass('upvote loading color-green');
+                                    data.find('.numberText').text(result);
+                                }, 1000);
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+}

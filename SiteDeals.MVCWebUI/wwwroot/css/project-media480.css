@@ -1,0 +1,40 @@
+.productsListItem { flex-direction: column;}
+.productsListItem .products-list-content {width: 50%;margin: 0 auto;}
+.productsListItem .products-list-text {width: 100%;}
+.productsBottom {flex-direction: column;}
+.productsBottom .username {width: 100%;margin-bottom: 30px;}
+.productsBottom .products-right {width: 100%;}
+.products-list-text .productsTop>span {padding: 0;}
+#containerHeader .twoList {align-items: flex-start;flex-direction: column;}
+.product-seller-container>span:last-of-type {margin-top: 20px;width: auto;}
+.social-media-share>div {width: 50%;}
+.social-media-share a {width: 160px;}
+.social-media-share>div {width: 50%;display: inline-flex;}
+.pagination-content-comment-item>div:nth-child(1) img {padding: 0 0 0 5px;}
+#containerHeader .headerLogin {right: 0;}
+.menu ul {flex-direction: column;width: 100%;text-align: center;}
+#containerHeader .headerLogin {flex-wrap: wrap;}
+#containerHeader .headerLogin .search-bar {width: 100%;}
+#containerHeader .headerLogin .item:nth-child(1) {width: 100% !important;display: block;}
+#containerHeader .headerLogin .item:nth-child(2) {width: 50%;}
+#containerHeader .headerLogin .item:nth-child(3) {width: 50%;}
+#containerHeader .headerLogin .item {margin: 0;}
+#containerHeader .headerLogin .membership-register-link {width: 100%;justify-content: space-around;}
+#containerHeader .headerLogin .membership-login-link {width: calc(100% - 10px);margin-top: 10px;}
+#containerHeader .headerLogin .membership-register-link {width: calc(100% - 10px) !important;margin-left: 10px;margin-top: 10px;}
+.profile-item > div {padding: 10px 5px 0 0;}
+#containerHeader .headerLogin .add-product-header {width: 140px;}
+#dvLoginFormMain input {margin-bottom: 20px;}
+.sign-in-container .sign-in-item fieldset {width: 90%;}
+.sign-in-container .sign-in-item .social-media-login .item {flex-direction: column;margin-bottom: 10px;}
+.sign-in-container .sign-in-item .social-media-login .item>button {margin-bottom: 10px;width: 100%;}
+.sign-in-container .sign-in-item .loginRegister {font-size: 16px; margin-top: 20px;}
+.sign-in-container .sign-in-item legend {text-align: center;}
+.product-add-panel-photo .photo-item .input-group {width: calc(50% - 10px);}
+.product-add-panel-price-information .product-add-panel-price-information-container .product-add-panel-price-information-item {width: 100%;}
+.product-add-panel-price-information .product-add-panel-price-information-container .product-add-panel-price-information-item:nth-child(2n) {margin-left: 0;}
+.product-add-panel-category .product-add-panel-category-container .product-add-panel-category-item .item {width: calc(50% - 20px);}
+.product-add-panel-save .product-add-panel-save-container .product-add-panel-save-item input {width: 150px;}
+#footer-container .footer-two .footer-item:nth-child(1) .item {text-align: center;}
+#footer-container .footer-two .footer-item:nth-child(2) .item {display: flex;flex-direction: column;align-items: center;text-align: center;}
+.e-newsletter form input {width: 100%;}

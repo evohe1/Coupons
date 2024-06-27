@@ -1,0 +1,9 @@
+.productsBottom .username {width: 25%;}
+.productsBottom .products-right {width: 75%;}
+.productsBottom .products-right>i {margin-right: 10px;}
+.product-seller-container>span:last-of-type {margin-top: 20px;width: 100%;}
+.pagination-content-comment-item>div:nth-child(1) img {width: 100%;padding: 0 10px;}
+.pagination-content-comment-item>div:nth-child(2) {padding: 0 15px;}
+.menu ul li {margin-right: 25px;}
+#product-add-link-domain {height: 75vh;}
+.product-add-panel-category .product-add-panel-category-container .product-add-panel-category-item .item {width: calc(20% - 20px);}

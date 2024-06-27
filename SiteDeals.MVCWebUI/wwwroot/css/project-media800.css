@@ -1,0 +1,28 @@
+.productsList .productsListTwo .most-liked-content {margin: 0 0 7px;}
+.productsList .productsListTwo:nth-child(1) {width: 100%;}
+.productsList .productsListTwo:nth-child(2) {width: 100%;}
+.most-liked-item .twoList {flex-direction: column;align-content: space-around;}
+.most-liked-item .twoList .most-liked-img {margin: 0 auto;}
+.most-liked-item .twoList .most-liked-title {width: 100%;padding: 15px 8px;text-align: center;}
+.most-liked-bottom {justify-content: space-around;margin-bottom: 40px;border-bottom: 1px solid #644bd73b;padding: 0 0 30px;right: 0;}
+.most-liked-item:last-of-type .most-liked-bottom {border-bottom: none;}
+.most-liked-content-title {text-align: center;}
+.productsDetail .twoList>.item {width: 100%;margin-right: 0;margin-bottom: 29px;}
+.product-seller-container>span:last-of-type {margin-top: 0;width: auto;}
+.comment-container-bottom .comment-text .comment-two .comment-profil img {width: 100%;}
+.comment-container-bottom .comment-text .comment-two .comment-send {padding: 0 0 0 15px;}
+.other-products-container .other-products-item {width: calc(33.333% - 10px);margin-right: 10px;margin-bottom: 20px;}
+.hamburger-btn {display: inline-block;top: 21px;position: absolute;}
+#containerHeader .headerLogin {right: 30px;position: relative;}
+#menu-list {display: none;}
+.product-add-link-domain-container .item { -webkit-transform: initial;transform: initial;position: relative;top: 0;left: 0;margin: 0 auto;}
+#product-add-link-domain {height: auto;padding: 100px 0;}
+.sign-in-container { flex-direction: column-reverse;}
+.sign-in-container .sign-in-item:nth-child(1) {width: 100%;}
+.sign-in-container .sign-in-item:nth-child(2) {width: 100%;}
+.sign-in-container .sign-in-item .text-container img {position: relative;right: 0;}
+.sign-in-container .sign-in-item {height: 100vh !important;}
+.sign-in-container .sign-in-item .text-container {padding: 25px 50px;}
+.product-add-panel-category .product-add-panel-category-container .product-add-panel-category-item .item {width: calc(33.33% - 20px);}
+.product-add-panel-photos .product-add-panel-row:nth-child(1) {width: 100%;}
+.product-add-panel-photos .product-add-panel-row:nth-child(2) {width: 100%;margin: 20px;}
